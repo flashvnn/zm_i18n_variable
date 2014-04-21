@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Multi language variables helper.
+ */
+/**
+ * Implementation of hook_form_variable_edit_form_alter().
+ */
+function zm_i18n_variable_form_variable_edit_form_alter(&$form, &$form_state, $form_id) {
+  $langcode = drupal_get_query_parameters();
+  if(isset($langcode['variable_realm_key_language']) && $langcode['variable_realm_key_language'] != 'en' && count($form['#variable_edit_form']) > 0) {
+    foreach ($form['#variable_edit_form'] as $variable_item) {
+      if(isset($form[$variable_item])){
+        $value_translate = i18n_variable_get($variable_item, $langcode['variable_realm_key_language'], $form[$variable_item]['#default_value']);
+        $form[$variable_item]['#default_value'] = $value_translate;
+      }
+    }
+  }
+}

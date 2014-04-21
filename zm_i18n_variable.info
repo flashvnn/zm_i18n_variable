@@ -1,0 +1,6 @@
+name = ZM Multi Language Variables
+description = Multi language variables helper.
+core = 7.x
+php = 5.3
+package = Multilingual - Internationalization
+dependencies[] = i18n_variable
